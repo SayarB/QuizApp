@@ -3,6 +3,7 @@ import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import CenterThumbnail from "../components/CenterThumbnail";
 import Link from "next/link";
+import { useEffect } from "react";
 export default function Home({ categories }) {
   return (
     <div className={styles.container}>
@@ -14,7 +15,10 @@ export default function Home({ categories }) {
       <h1 className={styles.header_text}>Choose Category</h1>
       <div className={styles.thumbnail_container}>
         {categories?.trivia_categories.map((category) => (
-          <Link href={`/quiz?category=${category.id}`}>
+          <Link
+            key={`category_thumbnail_${category.id}`}
+            href={`/quiz?category=${category.id}`}
+          >
             <a className={styles.thumbnail_link}>
               <CenterThumbnail>
                 <p>{category.name}</p>
@@ -28,7 +32,12 @@ export default function Home({ categories }) {
 }
 export async function getStaticProps() {
   const res = await fetch("https://opentdb.com/api_category.php");
-  const data = await res.json();
+  let data = await res.json();
+  data.trivia_categories = [
+    { id: -1, name: "Mixed" },
+    { id: -2, name: "Random" },
+    ...data.trivia_categories,
+  ];
   return {
     props: {
       categories: data,

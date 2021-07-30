@@ -20,7 +20,6 @@ export default function CenterThumbnail({ children }) {
   const ref = useRef(null);
   useEffect(() => {
     const color_index = Math.floor(Math.random() * colors.length);
-    console.log(color_index);
 
     ref.current.style.backgroundColor = colors[color_index];
   }, []);
