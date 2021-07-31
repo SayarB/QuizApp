@@ -40,6 +40,20 @@
   font-size: 20px;
   font-family: "Titillium Web", sans-serif;
 }
+.header_text {
+  font-family: "Titillium Web", sans-serif;
+  letter-spacing: 2;
+  font-weight: 900;
+  font-size: 50px;
+
+  padding: 10px;
+
+  position: absolute;
+  top: -1px;
+  color: white;
+  width: 100%;
+  background-color: hsl(240, 41%, 23%);
+}
 
 .text_div {
   font-family: "Titillium Web", sans-serif;
@@ -103,4 +117,11 @@
 .next_button:hover {
   background-color: rgba(0, 0, 0, 0);
   color: white;
+}
+.buttons_div {
+  width: 100%;
+  margin: 5px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
 }

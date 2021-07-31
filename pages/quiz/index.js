@@ -7,7 +7,7 @@ import ScoreCard from "../../components/ScoreCard";
 import { useState } from "react";
 export default function Quiz({ quiz }) {
   const router = useRouter();
-  const { category, difficulty, number } = router.query;
+  const { category, difficulty, number, name } = router.query;
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [score, setScore] = useState(0);
   const [showScore, setShowScore] = useState(false);
@@ -47,6 +47,7 @@ export default function Quiz({ quiz }) {
 
   return (
     <div className={styles.quiz_container}>
+      <h1 className={styles.header_text}>{name}</h1>
       {showScore ? (
         <ScoreCard
           retakeQuiz={retakeQuiz}

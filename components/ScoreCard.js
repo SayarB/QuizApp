@@ -10,9 +10,6 @@ export default function ScoreCard({
 }) {
   const router = useRouter();
 
-
-  
-
   return (
     <div className={styles.quiz_card}>
       <h1>
@@ -26,7 +23,7 @@ export default function ScoreCard({
         color={"hsl(240, 41%, 23%)"}
       />
       <p>Well Done</p>
-      <div>
+      <div className={styles.buttons_div}>
         <Button
           onClick={() => {
             retakeQuiz();

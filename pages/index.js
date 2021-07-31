@@ -17,7 +17,9 @@ export default function Home({ categories }) {
         {categories?.trivia_categories.map((category) => (
           <Link
             key={`category_thumbnail_${category.id}`}
-            href={`/prequiz?categoryid=${category.id}&categoryname=${category.name}`}
+            href={`/prequiz?categoryid=${category.id}&categoryname=${
+              category.name != "Random" ? category.name : category.value
+            }`}
           >
             <a className={styles.thumbnail_link}>
               <CenterThumbnail>
@@ -33,9 +35,14 @@ export default function Home({ categories }) {
 export async function getStaticProps() {
   const res = await fetch("https://opentdb.com/api_category.php");
   let data = await res.json();
+  let randint = Math.floor(Math.random() * data.trivia_categories.length);
   data.trivia_categories = [
     { id: -1, name: "Mixed" },
-    { id: -2, name: "Random" },
+    {
+      id: data.trivia_categories[randint].id,
+      name: "Random",
+      value: data.trivia_categories[randint].name,
+    },
     ...data.trivia_categories,
   ];
   return {

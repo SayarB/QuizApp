@@ -31,6 +31,7 @@ export default function PreQuiz({ category }) {
   ];
   return (
     <div className={styles.prequiz_container}>
+      <h1 className={styles.header_text}>{category.name}</h1>
       <div className={styles.prequiz_form}>
         <TextField
           id="standard-select-currency"
@@ -68,6 +69,7 @@ export default function PreQuiz({ category }) {
                 category: category.id,
                 difficulty: difficulty,
                 number: numOfQuestions,
+                name: category.name,
               },
             });
           }}
