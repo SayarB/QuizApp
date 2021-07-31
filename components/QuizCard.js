@@ -10,8 +10,9 @@ export default function QuizCard({ question, number, optionClickHandler }) {
         <p>{decode(question.question)}</p>
       </div>
       <div className={styles.options_div}>
-        {question.options.map((option) => (
+        {question.options.map((option, i) => (
           <button
+            key={"button_" + i}
             className={
               (option.isCorrect ? styles.correct : "") +
               " " +
