@@ -59,7 +59,7 @@ export default function PreQuiz({ category }) {
           onChange={(e) => {
             setNumOfQuestions(e.target.value);
           }}
-          margin="normal"
+          margin="dense"
         />
         <Button
           onClick={() => {
