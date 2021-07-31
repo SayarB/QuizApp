@@ -34,3 +34,9 @@
   width: 100%;
   background-color: hsl(240, 41%, 23%);
 }
+@media screen and (max-width: 400px) {
+  .header_text {
+    font-size: 35px;
+    text-align: center;
+  }
+}
