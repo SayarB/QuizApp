@@ -1,23 +1,63 @@
 import { StylesProvider } from "@material-ui/core";
 import { useRouter } from "next/router";
 import styles from "../../styles/Quiz.module.css";
+import QuizCard from "../../components/QuizCard";
+import ScoreCard from "../../components/ScoreCard";
+
+import { useState } from "react";
 export default function Quiz({ quiz }) {
+  const router = useRouter();
+  const { category, difficulty, number } = router.query;
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [score, setScore] = useState(0);
+  const [showScore, setShowScore] = useState(false);
+  const answerOptionClickHandler = (isCorrect) => {
+    if (isCorrect) {
+      setScore((score) => score + 1);
+    }
+    if (currentQuestion == quiz.questions.length - 1) {
+      setShowScore(true);
+    } else {
+      setCurrentQuestion((cur) => cur + 1);
+    }
+  };
+
+  const retakeQuiz = () => {
+    setCurrentQuestion(0);
+    setScore(0);
+    setShowScore(false);
+  };
+
+  const resetQuiz = () => {
+    setCurrentQuestion(0);
+    setScore(0);
+    setShowScore(false);
+    router.push({
+      pathname: "/quiz",
+      query: {
+        category: category,
+        difficulty: difficulty,
+        number: number,
+      },
+    });
+  };
+
   return (
-    <div>
-      {quiz.questions.map((question) => (
-        <div>
-          <p>{atob(question.question)}</p>
-          {question.options.map((option) => (
-            <button
-              className={
-                styles.option + (option.isCorrect ? " " + styles.correct : "")
-              }
-            >
-              {atob(option.text)}
-            </button>
-          ))}
-        </div>
-      ))}
+    <div className={styles.quiz_container}>
+      {showScore ? (
+        <ScoreCard
+          retakeQuiz={retakeQuiz}
+          resetQuiz={resetQuiz}
+          score={score}
+          totalQuestions={quiz.questions.length}
+        />
+      ) : (
+        <QuizCard
+          optionClickHandler={answerOptionClickHandler}
+          number={currentQuestion + 1}
+          question={quiz.questions[currentQuestion]}
+        />
+      )}
     </div>
   );
 }
@@ -32,11 +72,13 @@ export async function getServerSideProps(context) {
   }
 
   const response = await fetch(
-    `https://opentdb.com/api.php?amount=${number || "10"}${
+    `https://opentdb.com/api.php?amount=${
+      number || "10"
+    }&type=multiple&encode=base64${
       category > 0 ? `&category=${category}` : ""
     }${difficulty != "all" ? `&difficulty=${difficulty}` : ""}&token=${
       data.token
-    }&type=multiple&encode=base64`
+    }`
   );
   const quizData = await response.json();
   let questions = [];

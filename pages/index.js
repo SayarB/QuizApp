@@ -17,7 +17,7 @@ export default function Home({ categories }) {
         {categories?.trivia_categories.map((category) => (
           <Link
             key={`category_thumbnail_${category.id}`}
-            href={`/quiz?category=${category.id}`}
+            href={`/prequiz?categoryid=${category.id}&categoryname=${category.name}`}
           >
             <a className={styles.thumbnail_link}>
               <CenterThumbnail>
