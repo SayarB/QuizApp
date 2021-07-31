@@ -1,8 +1,22 @@
+import { useEffect, useState } from "react";
 import styles from "../styles/Quiz.module.css";
-export default function QuizCard({ question, number, optionClickHandler }) {
+export default function QuizCard({
+  question,
+  number,
+  optionClickHandler,
+  nextQuestion,
+}) {
   const decode = (text) => {
     return atob(text);
   };
+
+  const [showCorrect, setShowCorrect] = useState(false);
+  const [optionSelected, setOptionSelected] = useState(-1);
+
+  useEffect(() => {
+    setShowCorrect(false);
+    setOptionSelected(-1);
+  }, [question]);
 
   return (
     <div className={styles.quiz_card + " " + styles.quiz_question}>
@@ -14,11 +28,17 @@ export default function QuizCard({ question, number, optionClickHandler }) {
           <button
             key={"button_" + i}
             className={
-              (option.isCorrect ? styles.correct : "") +
+              (option.isCorrect && showCorrect ? styles.correct : "") +
+              " " +
+              (optionSelected === i && showCorrect && !option.isCorrect
+                ? styles.incorrect
+                : "") +
               " " +
               styles.option_button
             }
             onClick={() => {
+              setOptionSelected(i);
+              setShowCorrect(true);
               optionClickHandler(option.isCorrect);
             }}
           >
@@ -26,6 +46,14 @@ export default function QuizCard({ question, number, optionClickHandler }) {
           </button>
         ))}
       </div>
+      <button
+        className={styles.next_button}
+        onClick={() => {
+          nextQuestion();
+        }}
+      >
+        Next
+      </button>
     </div>
   );
 }

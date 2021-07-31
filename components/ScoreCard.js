@@ -10,6 +10,9 @@ export default function ScoreCard({
 }) {
   const router = useRouter();
 
+
+  
+
   return (
     <div className={styles.quiz_card}>
       <h1>

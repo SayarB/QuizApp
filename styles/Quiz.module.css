@@ -1,13 +1,10 @@
-.correct {
-  background-color: rgb(155, 255, 155);
-}
 .quiz_card {
   background-color: white;
   width: min(80vw, 500px);
   display: flex;
   flex-direction: column;
   place-items: center;
-  position: absolute;
+  position: relative;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -33,6 +30,7 @@
   flex-direction: column;
 }
 .option_button {
+  transition: all 0.2s;
   background-color: white;
   border: 3px solid black;
   border-radius: 20px;
@@ -80,4 +78,29 @@
     background-color: hsl(240, 41%, 23%);
     color: white;
   }
+}
+.correct {
+  background-color: rgb(72, 247, 72);
+}
+.incorrect {
+  background-color: rgb(245, 73, 67);
+}
+.next_button {
+  position: absolute;
+  height: 45px;
+  width: 60%;
+  left: 20%;
+  bottom: -50px;
+  border-width: 2px;
+  border: solid white;
+  background-color: white;
+  color: black;
+  font-size: 20px;
+  transition: all 0.5s;
+  transform: (0, -100%);
+  border-radius: 10px;
+}
+.next_button:hover {
+  background-color: rgba(0, 0, 0, 0);
+  color: white;
 }

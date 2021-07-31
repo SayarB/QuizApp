@@ -11,10 +11,13 @@ export default function Quiz({ quiz }) {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [score, setScore] = useState(0);
   const [showScore, setShowScore] = useState(false);
+
   const answerOptionClickHandler = (isCorrect) => {
     if (isCorrect) {
       setScore((score) => score + 1);
     }
+  };
+  const nextQuestion = () => {
     if (currentQuestion == quiz.questions.length - 1) {
       setShowScore(true);
     } else {
@@ -53,6 +56,7 @@ export default function Quiz({ quiz }) {
         />
       ) : (
         <QuizCard
+          nextQuestion={nextQuestion}
           optionClickHandler={answerOptionClickHandler}
           number={currentQuestion + 1}
           question={quiz.questions[currentQuestion]}
