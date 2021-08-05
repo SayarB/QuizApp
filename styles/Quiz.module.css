@@ -94,12 +94,15 @@
   }
 }
 .correct {
-  background-color: rgb(72, 247, 72);
+  background-color: rgb(77, 207, 7);
 }
 .correct:hover {
-  background-color: rgb(72, 247, 72);
+  background-color: rgb(77, 207, 77);
 }
 .incorrect {
+  background-color: rgb(245, 73, 67);
+}
+.incorrect:hover {
   background-color: rgb(245, 73, 67);
 }
 .next_button {
