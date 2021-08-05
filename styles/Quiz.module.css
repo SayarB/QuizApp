@@ -96,6 +96,9 @@
 .correct {
   background-color: rgb(72, 247, 72);
 }
+.correct:hover {
+  background-color: rgb(72, 247, 72);
+}
 .incorrect {
   background-color: rgb(245, 73, 67);
 }
