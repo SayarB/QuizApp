@@ -5,7 +5,7 @@ import Loading from "../components/Loading";
 import NProgress from "nprogress";
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
-  const [loading, setLoading] = useState();
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     const handleStart = (url) => {
       setLoading(true);
@@ -29,7 +29,12 @@ function MyApp({ Component, pageProps }) {
     };
   }, [router]);
 
-  return loading ? <Loading /> : <Component {...pageProps} />;
+  return (
+    <>
+      <Component {...pageProps} />
+      {loading ? <Loading /> : <></>}
+    </>
+  );
 }
 
 export default MyApp;
