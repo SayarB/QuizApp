@@ -20,7 +20,7 @@ export default function Home({ categories }) {
       <div className={styles.thumbnail_container}>
         {categories?.trivia_categories.map((category) => (
           <Link
-            key={`category_thumbnail_${category.id}`}
+            key={`category_thumbnail_${category.name}`}
             href={`/prequiz?categoryid=${category.id}&categoryname=${
               category.name != "Random" ? category.name : category.value
             }`}
