@@ -37,9 +37,11 @@ export default function QuizCard({
               styles.option_button
             }
             onClick={() => {
-              setOptionSelected(i);
-              setShowCorrect(true);
-              optionClickHandler(option.isCorrect);
+              if (!showCorrect) {
+                setOptionSelected(i);
+                setShowCorrect(true);
+                optionClickHandler(option.isCorrect);
+              }
             }}
           >
             {decode(option.text)}
